@@ -10,20 +10,48 @@
       font-family: Arial, sans-serif;
       background: #0f0f0f;
       color: #fff;
+      display: flex;
+      min-height: 100vh;
     }
     header {
       padding: 20px;
-      text-align: center;
       font-size: 28px;
       font-weight: bold;
       background: #1a1a1a;
+      color: #fff;
+    }
+    .sidebar {
+      width: 220px;
+      background: #1a1a1a;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      min-height: 100vh;
+    }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+    .sidebar a:hover {
+      background: #007bff;
+    }
+    main {
+      flex: 1;
+      padding: 20px;
     }
     .hero {
-      padding: 60px 20px;
+      padding: 40px 20px;
       text-align: center;
+      background: #111;
+      border-radius: 12px;
+      margin-bottom: 20px;
     }
     .hero h1 {
-      font-size: 40px;
+      font-size: 36px;
       margin-bottom: 10px;
     }
     .hero p {
@@ -41,59 +69,79 @@
       font-size: 16px;
     }
     .section {
-      padding: 40px 20px;
+      padding: 30px 20px;
       text-align: center;
+      background: #111;
+      border-radius: 12px;
+      margin-bottom: 20px;
     }
     footer {
       text-align: center;
       padding: 20px;
       background: #1a1a1a;
-      opacity: 0.8;
-      margin-top: 40px;
+      opacity: 0.9;
+      margin-top: 20px;
     }
-  .ads-container {display:flex;justify-content:center;align-items:center;gap:20px;margin-top:20px;flex-wrap:wrap;}
-.ad-box {background:#111;padding:10px;border-radius:10px;box-shadow:0 0 10px #000;width:330px;}
-.ad-box.vertical {width:140px;}
-@media(max-width:600px){.ads-container{flex-direction:column;}.ad-box.vertical{width:100%;}}
-</style>
+    .ads-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .ad-box {
+      background:#111;
+      padding:10px;
+      border-radius:10px;
+      box-shadow:0 0 10px #000;
+      width:330px;
+    }
+    .ad-box.vertical { width:140px; }
+    @media(max-width:900px){
+      body { flex-direction: column; }
+      .sidebar { width: 100%; flex-direction: row; justify-content: space-around; }
+      .ad-box.vertical { width:100%; }
+    }
+  </style>
 </head>
 <body>
-  <header>AB Studio</header>
-
-  <section class="hero">
-    <h1>Welcome to AB Studio</h1>
-    <p>Your modern platform for tools, crypto & automation.</p>
-    <a href="#contact" class="btn">Contact Us</a>
-  </section>
-
-  <section class="section">
-    <h2>Our Services</h2>
-    <p>✔ Telegram Bots<br>✔ Crypto Tools<br>✔ Web Design<br>✔ Automation</p>
-  </section>
-
-  <section class="section" id="contact">
-    <h2>Contact</h2>
-    <p>Email: abcoinseo@gmail.com</p>
-    <p>Telegram: @abstudioseo</p>
-  </section>
-
-  <footer>© 2025 AB Studio — All rights reserved.  <div class='MainAdverTiseMentDiv' data-publisher="eyJpdiI6IjJjSXFCL0lHM0UwMGtQRWw4S3R0b3c9PSIsInZhbHVlIjoiaDdHYXB2aitvcmFMZkNsN3dlNUNWZz09IiwibWFjIjoiMDY2Nzg4NDRmMmY0Y2QyNmRjMzFmNmRiM2UxNmM1NmUyMGRjZDgxNWY0MDhmMTc0YjgwMjFhMmE5NzhiMGQ4ZSIsInRhZyI6IiJ9" data-adsize="320x50"></div>
-  <script class="adScriptClass" src="https://adsbitvex.site/assets/ads/ad.js"></script>
-
-  <div class='MainAdverTiseMentDiv' data-publisher="eyJpdiI6Im80aitHWUU4d0FLd2FCbWxPN1I5aHc9PSIsInZhbHVlIjoiOFlhYW8yd0F6dXRtQWdrUEFlZTJ2QT09IiwibWFjIjoiODJjYzBhNDVjZThjOGI2YjQ2ZWY1ZDU0YjRkZWJhZGYyNzllMDdiYjBmN2RkZTY1ZjRiOWU1OGIxNTA3ZWMzMiIsInRhZyI6IiJ9" data-adsize="120x600"></div>
-  <script class="adScriptClass" src="https://adsbitvex.site/assets/ads/ad.js"></script>
-
-  <div class="ads-container">
-    <div class="ad-box">
-      <div class='MainAdverTiseMentDiv' data-publisher="eyJpdiI6IjJjSXFCL0lHM0UwMGtQRWw4S3R0b3c9PSIsInZhbHVlIjoiaDdHYXB2aitvcmFMZkNsN3dlNUNWZz09IiwibWFjIjoiMDY2Nzg4NDRmMmY0Y2QyNmRjMzFmNmRiM2UxNmM1NmUyMGRjZDgxNWY0MDhmMTc0YjgwMjFhMmE5NzhiMGQ4ZSIsInRhZyI6IiJ9" data-adsize="320x50"></div>
-      <script class="adScriptClass" src="https://adsbitvex.site/assets/ads/ad.js"></script>
-    </div>
-
-    <div class="ad-box vertical">
-      <div class='MainAdverTiseMentDiv' data-publisher="eyJpdiI6Im80aitHWUU4d0FLd2FCbWxPN1I5aHc9PSIsInZhbHVlIjoiOFlhYW8yd0F6dXRtQWdrUEFlZTJ2QT09IiwibWFjIjoiODJjYzBhNDVjZThjOGI2YjQ2ZWY1ZDU0YjRkZWJhZGYyNzllMDdiYjBmN2RkZTY1ZjRiOWU1OGIxNTA3ZWMzMiIsInRhZyI6IiJ9" data-adsize="120x600"></div>
-      <script class="adScriptClass" src="https://adsbitvex.site/assets/ads/ad.js"></script>
-    </div>
+  <div class="sidebar">
+    <header>AB Studio</header>
+    <a href="#hero">Home</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
   </div>
-</footer>
+  <main>
+    <section class="hero" id="hero">
+      <h1>Welcome to AB Studio</h1>
+      <p>Your modern platform for tools, crypto & automation.</p>
+      <a href="#contact" class="btn">Contact Us</a>
+    </section>
+
+    <section class="section" id="services">
+      <h2>Our Services</h2>
+      <p>✔ Telegram Bots<br>✔ Crypto Tools<br>✔ Web Design<br>✔ Automation</p>
+    </section>
+
+    <section class="section" id="contact">
+      <h2>Contact</h2>
+      <p>Email: abcoinseo@gmail.com</p>
+      <p>Telegram: @abstudioseo</p>
+    </section>
+
+    <div class="ads-container">
+      <div class="ad-box">
+        <div class='MainAdverTiseMentDiv' data-publisher="eyJpdiI6IjJjSXFCL0lHM0UwMGtQRWw4S3R0b3c9PSIsInZhbHVlIjoiaDdHYXB2aitvcmFMZkNsN3dlNUNWZz09IiwibWFjIjoiMDY2Nzg4NDRmMmY0Y2QyNmRjMzFmNmRiM2UxNmM1NmUyMGRjZDgxNWY0MDhmMTc0YjgwMjFhMmE5NzhiMGQ4ZSIsInRhZyI6IiJ9" data-adsize="320x50"></div>
+        <script class="adScriptClass" src="https://adsbitvex.site/assets/ads/ad.js"></script>
+      </div>
+      <div class="ad-box vertical">
+        <div class='MainAdverTiseMentDiv' data-publisher="eyJpdiI6Im80aitHWUU4d0FLd2FCbWxPN1I5aHc9PSIsInZhbHVlIjoiOFlhYW8yd0F6dXRtQWdrUEFlZTJ2QT09IiwibWFjIjoiODJjYzBhNDVjZThjOGI2YjQ2ZWY1ZDU0YjRkZWJhZGYyNzllMDdiYjBmN2RkZTY1ZjRiOWU1OGIxNTA3ZWMzMiIsInRhZyI6IiJ9" data-adsize="120x600"></div>
+        <script class="adScriptClass" src="https://adsbitvex.site/assets/ads/ad.js"></script>
+      </div>
+    </div>
+
+    <footer>© 2025 AB Studio — All rights reserved.</footer>
+  </main>
 </body>
 </html>
