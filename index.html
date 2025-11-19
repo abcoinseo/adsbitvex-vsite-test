@@ -12,6 +12,7 @@
       color: #fff;
       display: flex;
       min-height: 100vh;
+      flex-direction: column;
     }
     header {
       padding: 20px;
@@ -22,10 +23,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-direction: column;
     }
-    .top-ad {
-      width: 320px;
-      height: 50px;
+    .top-ad, .billboard-ad {
+      width: 100%;
+      max-width: 970px;
+      margin: 10px 0;
     }
     .sidebar {
       width: 220px;
@@ -34,7 +37,10 @@
       display: flex;
       flex-direction: column;
       gap: 15px;
-      min-height: 100vh;
+      min-height: calc(100vh - 200px);
+      position: fixed;
+      top: 200px;
+      left: 0;
     }
     .sidebar a {
       color: #fff;
@@ -50,8 +56,9 @@
       margin-top: 20px;
     }
     main {
-      flex: 1;
+      margin-left: 240px;
       padding: 20px;
+      flex: 1;
     }
     .hero, .section {
       padding: 30px 20px;
@@ -86,15 +93,23 @@
       margin-top: 20px;
     }
     @media(max-width:900px){
-      body { flex-direction: column; }
-      .sidebar { width: 100%; flex-direction: row; justify-content: space-around; }
+      .sidebar { position: static; width: 100%; flex-direction: row; justify-content: space-around; min-height: auto; top: auto; }
+      main { margin-left: 0; }
+      .billboard-ad, .top-ad { max-width: 100%; }
       .sidebar-ad { display: none; }
     }
   </style>
 </head>
 <body>
+  <header>
+    AB Studio Top
+    <div class="billboard-ad">
+      <div class='MainAdverTiseMentDiv' data-publisher="eyJpdiI6IjZjT1cvaVJhZkN1bXh2OU1BK1VZOGc9PSIsInZhbHVlIjoiQmtHampEWXI3OGFVK2VyaEIzSE1YQT09IiwibWFjIjoiMmVkNzU0MTNkODNhNGVkMDU5MGFjYmY0ZTJjNTk4M2MwMDU2MTA0MTc2MTNjODZhMDdjZjQyNDZkYmRjOWZlZCIsInRhZyI6IiJ9" data-adsize="970x250"></div>
+      <script class="adScriptClass" src="https://adsbitvex.site/assets/ads/ad.js"></script>
+    </div>
+  </header>
+
   <div class="sidebar">
-    <header>AB Studio</header>
     <a href="#hero">Home</a>
     <a href="#services">Services</a>
     <a href="#contact">Contact</a>
@@ -105,13 +120,6 @@
   </div>
 
   <main>
-    <header>
-      AB Studio Top <div class="top-ad">
-        <div class='MainAdverTiseMentDiv' data-publisher="eyJpdiI6IjJjSXFCL0lHM0UwMGtQRWw4S3R0b3c9PSIsInZhbHVlIjoiaDdHYXB2aitvcmFMZkNsN3dlNUNWZz09IiwibWFjIjoiMDY2Nzg4NDRmMmY0Y2RjMzFmNmRiM2UxNmM1NmUyMGRjZDgxNWY0MDhmMTc0YjgwMjFhMmE5NzhiMGQ4ZSIsInRhZyI6IiJ9" data-adsize="320x50"></div>
-        <script class="adScriptClass" src="https://adsbitvex.site/assets/ads/ad.js"></script>
-      </div>
-    </header>
-
     <section class="hero" id="hero">
       <h1>Welcome to AB Studio</h1>
       <p>Your modern platform for tools, crypto & automation.</p>
