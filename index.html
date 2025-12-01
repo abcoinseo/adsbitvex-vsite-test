@@ -1,149 +1,569 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AB Studio — Website</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f0f0f;
-      color: #fff;
-      display: flex;
-      min-height: 100vh;
-      flex-direction: column;
-    }
-    header {
-      padding: 20px;
-      font-size: 28px;
-      font-weight: bold;
-      background: #1a1a1a;
-      color: #fff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-direction: column;
-    }
-    .top-ad, .billboard-ad {
-      width: 100%;
-      max-width: 970px;
-      margin: 10px 0;
-    }
-    .sidebar {
-      width: 220px;
-      background: #1a1a1a;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      min-height: calc(100vh - 200px);
-      position: fixed;
-      top: 200px;
-      left: 0;
-    }
-    .sidebar a {
-      color: #fff;
-      text-decoration: none;
-      padding: 10px;
-      border-radius: 6px;
-      transition: 0.3s;
-    }
-    .sidebar a:hover {
-      background: #007bff;
-    }
-    .sidebar-ad {
-      margin-top: 20px;
-    }
-    main {
-      margin-left: 240px;
-      padding: 20px;
-      flex: 1;
-    }
-    .hero, .section {
-      padding: 30px 20px;
-      text-align: center;
-      background: #111;
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
-    .hero h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
-    }
-    .hero p {
-      font-size: 18px;
-      opacity: 0.8;
-    }
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 25px;
-      background: #007bff;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #1a1a1a;
-      opacity: 0.9;
-      margin-top: 20px;
-    }
-    @media(max-width:900px){
-      .sidebar { position: static; width: 100%; flex-direction: row; justify-content: space-around; min-height: auto; top: auto; }
-      main { margin-left: 0; }
-      .billboard-ad, .top-ad { max-width: 100%; }
-      .sidebar-ad { display: none; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Tap - Test Your Reaction Speed</title>
+    <meta name="description" content="Test your reaction speed with Quick Tap! Tap the circles as fast as you can and beat your high score in this addictive reaction game.">
+    <meta name="keywords" content="reaction game, quick tap, speed test, browser game, mobile game">
+    <meta name="author" content="Quick Tap Game">
+    
+    <meta property="og:title" content="Quick Tap - Test Your Reaction Speed">
+    <meta property="og:description" content="Test your reaction speed with Quick Tap! Tap the circles as fast as you can and beat your high score.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@QuickTapGame">
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --background: 210 40% 5%;
+            --foreground: 210 40% 98%;
+            --card: 222 47% 11%;
+            --card-foreground: 210 40% 98%;
+            --primary: 280 80% 60%;
+            --primary-foreground: 0 0% 100%;
+            --secondary: 190 80% 50%;
+            --secondary-foreground: 0 0% 100%;
+            --muted: 217 33% 17%;
+            --muted-foreground: 215 20% 65%;
+            --accent: 45 93% 58%;
+            --accent-foreground: 0 0% 100%;
+            --border: 217 33% 17%;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: hsl(var(--background));
+            color: hsl(var(--foreground));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: hsla(var(--card), 0.5);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid hsl(var(--border));
+        }
+
+        .header-content {
+            max-width: 1152px;
+            margin: 0 auto;
+        }
+
+        .header-main {
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            color: hsl(var(--primary));
+        }
+
+        .logo-text {
+            font-size: 1.875rem;
+            font-weight: 700;
+            background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .high-score {
+            text-align: right;
+        }
+
+        .high-score-label {
+            font-size: 0.75rem;
+            color: hsl(var(--muted-foreground));
+        }
+
+        .high-score-value {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .trophy-icon {
+            width: 16px;
+            height: 16px;
+            color: hsl(var(--accent));
+        }
+
+        .high-score-number {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .ad-container {
+            border-top: 1px solid hsla(var(--border), 0.5);
+            background: hsla(var(--muted), 0.2);
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .ad-label {
+            font-size: 10px;
+            color: hsla(var(--muted-foreground), 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .game-card {
+            width: 100%;
+            max-width: 896px;
+            background: hsla(var(--card), 0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid hsl(var(--border));
+            border-radius: 0.5rem;
+            padding: 2rem;
+        }
+
+        .start-screen, .game-over-screen {
+            text-align: center;
+            padding: 5rem 0;
+        }
+
+        .icon-container {
+            width: 128px;
+            height: 128px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px hsla(var(--primary), 0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 40px hsla(var(--primary), 0.8); }
+        }
+
+        .target-icon {
+            width: 64px;
+            height: 64px;
+            color: white;
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: hsl(var(--muted-foreground));
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+            padding: 1rem 3rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        .score-display {
+            font-size: 4.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 2rem;
+        }
+
+        .new-high-score {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: hsl(var(--accent));
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            animation: bounce-in 0.5s ease-out;
+        }
+
+        @keyframes bounce-in {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .stat {
+            flex: 1;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: hsl(var(--muted-foreground));
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .stat-value.primary { color: hsl(var(--primary)); }
+        .stat-value.secondary { color: hsl(var(--secondary)); }
+
+        .game-area {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: hsla(var(--muted), 0.3);
+            border-radius: 0.75rem;
+            border: 2px solid hsl(var(--border));
+            overflow: hidden;
+        }
+
+        .target {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .target:hover {
+            transform: scale(1.1);
+        }
+
+        .footer {
+            background: hsla(var(--card), 0.5);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid hsl(var(--border));
+        }
+
+        .footer-content {
+            max-width: 1152px;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: hsl(var(--muted-foreground));
+        }
+
+        @media (max-width: 768px) {
+            .logo-text { font-size: 1.5rem; }
+            h2 { font-size: 2rem; }
+            .subtitle { font-size: 1rem; }
+            .icon-container { width: 80px; height: 80px; }
+            .target-icon { width: 40px; height: 40px; }
+            .btn { font-size: 1rem; padding: 0.75rem 2rem; }
+            .score-display { font-size: 3rem; }
+            .stat-value { font-size: 2rem; }
+            .game-area { height: 300px; }
+            .target { width: 64px; height: 64px; }
+            .game-card { padding: 1rem; }
+            .start-screen, .game-over-screen { padding: 3rem 0; }
+        }
+
+        .hidden { display: none; }
+    </style>
 </head>
 <body>
-  <header>
-    AB Studio Top
-    <div class="billboard-ad">
-      <div class='MainAdverTiseMentDiv' data-publisher="eyJpdiI6IjZjT1cvaVJhZkN1bXh2OU1BK1VZOGc9PSIsInZhbHVlIjoiQmtHampEWXI3OGFVK2VyaEIzSE1YQT09IiwibWFjIjoiMmVkNzU0MTNkODNhNGVkMDU5MGFjYmY0ZTJjNTk4M2MwMDU2MTA0MTc2MTNjODZhMDdjZjQyNDZkYmRjOWZlZCIsInRhZyI6IiJ9" data-adsize="970x250"></div>
-      <script class="adScriptClass" src="https://adsbitvex.site/assets/ads/ad.js"></script>
-    </div>
-  </header>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-main">
+                <div class="logo">
+                    <svg class="logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                        <circle cx="12" cy="12" r="6" stroke-width="2"/>
+                        <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                    </svg>
+                    <h1 class="logo-text">Quick Tap</h1>
+                </div>
+                <div class="high-score">
+                    <p class="high-score-label">High Score</p>
+                    <div class="high-score-value">
+                        <svg class="trophy-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                            <path d="M4 22h16"/>
+                            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                        <span class="high-score-number" id="headerHighScore">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Header Ad -->
+            <div class="ad-container">
+                <span class="ad-label">Advertisement</span>
+                <div class="MainAdverTiseMentDiv" data-publisher="eyJpdiI6Im9yK09jRkJQQUcwZjNJczNUMEpZc2c9PSIsInZhbHVlIjoiOENtT0tWSzFWRFZBSE9nSjl5WitVdz09IiwibWFjIjoiOTVjZjQ5MzMxM2RlMmM4Y2IzMmIxNDYwYWJlMTAwNTljZmRhZjU0NDIyYTdlZDMwNzc4ZGRkNWY4ZDRhMzZjYSIsInRhZyI6IiJ9" data-adsize="320x50"></div>
+            </div>
+        </div>
+    </header>
 
-  <div class="sidebar">
-    <a href="#hero">Home</a>
-    <a href="#services">Services</a>
-    <a href="#contact">Contact</a>
-    <div class="sidebar-ad">
-      <div class='MainAdverTiseMentDiv' data-publisher="eyJpdiI6Im80aitHWUU4d0FLd2FCbWxPN1I5aHc9PSIsInZhbHVlIjoiOFlhYW8yd0F6dXRtQWdrUEFlZTJ2QT09IiwibWFjIjoiODJjYzBhNDVjZThjOGI2YjQ2ZWY1ZDU0YjRkZWJhZGYyNzllMDdiYjBmN2RkZTY1ZjRiOWU1OGIxNTA3ZWMzMiIsInRhZyI6IiJ9" data-adsize="120x600"></div>
-      <script class="adScriptClass" src="https://adsbitvex.site/assets/ads/ad.js"></script>
-    </div>
-  </div>
+    <!-- Main Game Area -->
+    <main class="main">
+        <div class="game-card">
+            <!-- Start Screen -->
+            <div id="startScreen" class="start-screen">
+                <div class="icon-container">
+                    <svg class="target-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                        <circle cx="12" cy="12" r="6" stroke-width="2"/>
+                        <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                    </svg>
+                </div>
+                <h2>Ready to Play?</h2>
+                <p class="subtitle">Tap the circles as fast as you can! You have 30 seconds.</p>
+                <button class="btn" onclick="startGame()">Start Game</button>
+            </div>
 
-  <main>
-    <section class="hero" id="hero">
-      <h1>Welcome to AB Studio</h1>
-      <p>Your modern platform for tools, crypto & automation.</p>
-      <a href="#contact" class="btn">Contact Us</a>
-    </section>
+            <!-- Game Over Screen -->
+            <div id="gameOverScreen" class="game-over-screen hidden">
+                <h2>Game Over!</h2>
+                <p class="subtitle">Your Score</p>
+                <p class="score-display" id="finalScore">0</p>
+                <div id="newHighScore" class="new-high-score hidden">
+                    <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                        <path d="M4 22h16"/>
+                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                    <span>New High Score!</span>
+                </div>
+                <button class="btn" onclick="startGame()">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" stroke-width="2"/>
+                        <path d="M3 3v5h5" stroke-width="2"/>
+                        <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" stroke-width="2"/>
+                        <path d="M16 16h5v5" stroke-width="2"/>
+                    </svg>
+                    Play Again
+                </button>
+            </div>
 
-    <section class="section" id="services">
-      <h2>Our Services</h2>
-      <p>✔ Telegram Bots<br>✔ Crypto Tools<br>✔ Web Design<br>✔ Automation</p>
-    </section>
+            <!-- Playing Screen -->
+            <div id="playingScreen" class="hidden">
+                <div class="game-stats">
+                    <div class="stat">
+                        <p class="stat-label">Score</p>
+                        <p class="stat-value primary" id="currentScore">0</p>
+                    </div>
+                    <div class="stat">
+                        <p class="stat-label">Time</p>
+                        <p class="stat-value secondary" id="timeLeft">30s</p>
+                    </div>
+                </div>
+                <div class="game-area" id="gameArea"></div>
+            </div>
+        </div>
+    </main>
 
-    <div class='MainAdverTiseMentDiv' data-publisher="eyJpdiI6IkRTc3hjTnp5ekpicEZMazIwdkprU2c9PSIsInZhbHVlIjoidHR0Zkwrc0FqR2h2dWlYQVlvNUJMQT09IiwibWFjIjoiNDY5ZDRmYzg1MWNkOWM5YjZlZjRiNzQxMDg3MmY4ODNlNDYzNjMxMmJhZjk2ZjMzOThlNjlmZGVkNDM4OTMxMyIsInRhZyI6IiJ9" data-adsize="320x50"></div> <script class="adScriptClass" src="https://adsbitvex.site/assets/ads/ad.js"></script>
-
-    <section class="section" id="contact">
-      <h2>Contact</h2>
-      <p>Email: abcoinseo@gmail.com</p>
-      <p>Telegram: @abstudioseo</p>
-    </section>
-
-    <footer>
-      © 2025 AB Studio — All rights reserved.
-      <div class='MainAdverTiseMentDiv' data-publisher="eyJpdiI6IjJjSXFCL0lHM0UwMGtQRWw4S3R0b3c9PSIsInZhbHVlIjoiaDdHYXB2aitvcmFMZkNsN3dlNUNWZz09IiwibWFjIjoiMDY2Nzg4NDRmMmY0Y2RjMzFmNmRiM2UxNmM1NmUyMGRjZDgxNWY0MDhmMTc0YjgwMjFhMmE5NzhiMGQ4ZSIsInRhZyI6IiJ9" data-adsize="320x50"></div>
-      <script class="adScriptClass" src="https://adsbitvex.site/assets/ads/ad.js"></script>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="ad-container">
+                <span class="ad-label">Advertisement</span>
+                <div class="MainAdverTiseMentDiv" data-publisher="eyJpdiI6Im9yK09jRkJQQUcwZjNJczNUMEpZc2c9PSIsInZhbHVlIjoiOENtT0tWSzFWRFZBSE9nSjl5WitVdz09IiwibWFjIjoiOTVjZjQ5MzMxM2RlMmM4Y2IzMmIxNDYwYWJlMTAwNTljZmRhZjU0NDIyYTdlZDMwNzc4ZGRkNWY4ZDRhMzZjYSIsInRhZyI6IiJ9" data-adsize="320x50"></div>
+            </div>
+            <div class="footer-text">
+                <p>© 2025 Quick Tap Game. Made with ❤️</p>
+            </div>
+        </div>
     </footer>
-  </main>
+
+    <!-- Ad Script -->
+    <script class="adScriptClass" src="https://adsbitvex.site/assets/ads/ad.js" async></script>
+
+    <!-- Game JavaScript -->
+    <script>
+        let score = 0;
+        let highScore = 0;
+        let gameActive = false;
+        let timeLeft = 30;
+        let timerInterval = null;
+        let targetElement = null;
+
+        // Load high score from localStorage
+        function loadHighScore() {
+            const saved = localStorage.getItem('highScore');
+            if (saved) {
+                highScore = parseInt(saved);
+                document.getElementById('headerHighScore').textContent = highScore;
+            }
+        }
+
+        // Save high score to localStorage
+        function saveHighScore() {
+            localStorage.setItem('highScore', highScore.toString());
+            document.getElementById('headerHighScore').textContent = highScore;
+        }
+
+        // Get random position for target
+        function getRandomPosition() {
+            const x = Math.random() * 70 + 10;
+            const y = Math.random() * 60 + 10;
+            return { x, y };
+        }
+
+        // Create and show target
+        function showTarget() {
+            const gameArea = document.getElementById('gameArea');
+            if (targetElement) {
+                gameArea.removeChild(targetElement);
+            }
+
+            targetElement = document.createElement('div');
+            targetElement.className = 'target';
+            targetElement.onclick = handleTargetClick;
+
+            const pos = getRandomPosition();
+            targetElement.style.left = pos.x + '%';
+            targetElement.style.top = pos.y + '%';
+            targetElement.style.transform = 'translate(-50%, -50%)';
+
+            gameArea.appendChild(targetElement);
+        }
+
+        // Handle target click
+        function handleTargetClick() {
+            if (!gameActive) return;
+            
+            score++;
+            document.getElementById('currentScore').textContent = score;
+            showTarget();
+        }
+
+        // Update timer
+        function updateTimer() {
+            timeLeft--;
+            document.getElementById('timeLeft').textContent = timeLeft + 's';
+
+            if (timeLeft <= 0) {
+                endGame();
+            }
+        }
+
+        // Start game
+        function startGame() {
+            score = 0;
+            timeLeft = 30;
+            gameActive = true;
+
+            // Update UI
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('gameOverScreen').classList.add('hidden');
+            document.getElementById('playingScreen').classList.remove('hidden');
+            document.getElementById('currentScore').textContent = '0';
+            document.getElementById('timeLeft').textContent = '30s';
+
+            // Show first target
+            showTarget();
+
+            // Start timer
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        // End game
+        function endGame() {
+            gameActive = false;
+            clearInterval(timerInterval);
+
+            // Remove target
+            const gameArea = document.getElementById('gameArea');
+            if (targetElement) {
+                gameArea.removeChild(targetElement);
+                targetElement = null;
+            }
+
+            // Check for new high score
+            const isNewHighScore = score > highScore;
+            if (isNewHighScore) {
+                highScore = score;
+                saveHighScore();
+            }
+
+            // Update UI
+            document.getElementById('playingScreen').classList.add('hidden');
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('newHighScore').classList.toggle('hidden', !isNewHighScore);
+            document.getElementById('gameOverScreen').classList.remove('hidden');
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            loadHighScore();
+        });
+    </script>
 </body>
 </html>
