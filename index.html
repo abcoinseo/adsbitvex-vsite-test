@@ -3,562 +3,523 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quick Tap - Test Your Reaction Speed</title>
-    <meta name="description" content="Test your reaction speed with Quick Tap! Tap the circles as fast as you can and beat your high score in this addictive reaction game.">
-    <meta name="keywords" content="reaction game, quick tap, speed test, browser game, mobile game">
-    <meta name="author" content="Quick Tap Game">
-    
-    <meta property="og:title" content="Quick Tap - Test Your Reaction Speed">
-    <meta property="og:description" content="Test your reaction speed with Quick Tap! Tap the circles as fast as you can and beat your high score.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
-    
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@QuickTapGame">
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
+    <title>Neon Defender Pro</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --background: 210 40% 5%;
-            --foreground: 210 40% 98%;
-            --card: 222 47% 11%;
-            --card-foreground: 210 40% 98%;
-            --primary: 280 80% 60%;
-            --primary-foreground: 0 0% 100%;
-            --secondary: 190 80% 50%;
-            --secondary-foreground: 0 0% 100%;
-            --muted: 217 33% 17%;
-            --muted-foreground: 215 20% 65%;
-            --accent: 45 93% 58%;
-            --accent-foreground: 0 0% 100%;
-            --border: 217 33% 17%;
-        }
+        /* --- CSS STYLING --- */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: hsl(var(--background));
-            color: hsl(var(--foreground));
-            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: #050505;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            overflow: hidden; /* Prevent scrolling */
+            height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        .header {
-            background: hsla(var(--card), 0.5);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid hsl(var(--border));
-        }
-
-        .header-content {
-            max-width: 1152px;
-            margin: 0 auto;
-        }
-
-        .header-main {
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            color: hsl(var(--primary));
-        }
-
-        .logo-text {
-            font-size: clamp(1.25rem, 4vw, 1.875rem);
-            font-weight: 700;
-            background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .high-score {
-            text-align: right;
-        }
-
-        .high-score-label {
-            font-size: clamp(0.625rem, 1.5vw, 0.75rem);
-            color: hsl(var(--muted-foreground));
-        }
-
-        .high-score-value {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-        }
-
-        .trophy-icon {
-            width: 16px;
-            height: 16px;
-            color: hsl(var(--accent));
-        }
-
-        .high-score-number {
-            font-size: clamp(1rem, 2.5vw, 1.25rem);
-            font-weight: 700;
-        }
-
-        .ad-container {
-            border-top: 1px solid hsla(var(--border), 0.5);
-            background: hsla(var(--muted), 0.2);
-            padding: 0.75rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .ad-label {
-            font-size: 10px;
-            color: hsla(var(--muted-foreground), 0.6);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .main {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-        }
-
-        .game-card {
-            width: 100%;
-            max-width: 896px;
-            background: hsla(var(--card), 0.5);
-            backdrop-filter: blur(12px);
-            border: 1px solid hsl(var(--border));
-            border-radius: 0.5rem;
-            padding: clamp(1rem, 4vw, 2rem);
-        }
-
-        .start-screen, .game-over-screen {
-            text-align: center;
-            padding: clamp(2rem, 8vw, 5rem) 0;
-        }
-
-        .icon-container {
-            width: clamp(80px, 20vw, 128px);
-            height: clamp(80px, 20vw, 128px);
-            margin: 0 auto clamp(1rem, 3vw, 1.5rem);
-            border-radius: 50%;
-            background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 20px hsla(var(--primary), 0.5); }
-            50% { transform: scale(1.05); box-shadow: 0 0 40px hsla(var(--primary), 0.8); }
-        }
-
-        .target-icon {
-            width: clamp(40px, 10vw, 64px);
-            height: clamp(40px, 10vw, 64px);
-            color: white;
-        }
-
-        h2 {
-            font-size: clamp(1.75rem, 6vw, 3rem);
-            font-weight: 700;
-            margin-bottom: clamp(0.75rem, 2vw, 1rem);
-        }
-
-        .subtitle {
-            font-size: clamp(0.875rem, 3vw, 1.25rem);
-            color: hsl(var(--muted-foreground));
-            margin-bottom: clamp(1.5rem, 4vw, 2rem);
-        }
-
-        .btn {
-            background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
-            color: white;
-            font-weight: 700;
-            font-size: clamp(1rem, 3vw, 1.25rem);
-            padding: clamp(0.75rem, 2vw, 1rem) clamp(2rem, 6vw, 3rem);
-            min-height: 44px;
-            border-radius: 9999px;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: clamp(0.375rem, 1vw, 0.5rem);
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
-        }
-
-        .score-display {
-            font-size: clamp(2.5rem, 10vw, 4.5rem);
-            font-weight: 700;
-            background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: clamp(1.25rem, 4vw, 2rem);
-        }
-
-        .new-high-score {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: clamp(0.375rem, 1vw, 0.5rem);
-            color: hsl(var(--accent));
-            font-size: clamp(1rem, 3.5vw, 1.5rem);
-            font-weight: 700;
-            margin-bottom: clamp(1rem, 3vw, 1.5rem);
-            animation: bounce-in 0.5s ease-out;
-        }
-
-        @keyframes bounce-in {
-            0% { transform: scale(0); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .game-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-        }
-
-        .stat {
-            flex: 1;
-            text-align: center;
-        }
-
-        .stat-label {
-            font-size: clamp(0.75rem, 2vw, 0.875rem);
-            color: hsl(var(--muted-foreground));
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-value {
-            font-size: clamp(2rem, 6vw, 3rem);
-            font-weight: 700;
-        }
-
-        .stat-value.primary { color: hsl(var(--primary)); }
-        .stat-value.secondary { color: hsl(var(--secondary)); }
-
-        .game-area {
+        /* Game Container */
+        #game-container {
             position: relative;
+            flex-grow: 1;
             width: 100%;
-            height: clamp(250px, 50vh, 400px);
-            background: hsla(var(--muted), 0.3);
-            border-radius: 0.75rem;
-            border: 2px solid hsl(var(--border));
-            overflow: hidden;
+            height: calc(100vh - 60px); /* Leave room for ad footer */
+            background: radial-gradient(circle at center, #1a1a2e 0%, #000000 100%);
         }
 
-        .target {
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* UI Overlay */
+        #ui-layer {
             position: absolute;
-            width: clamp(60px, 12vw, 80px);
-            height: clamp(60px, 12vw, 80px);
-            border-radius: 50%;
-            background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            border: 4px solid rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            animation: pulse-glow 2s ease-in-out infinite;
-            touch-action: manipulation;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Let clicks pass through to canvas */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .target:hover {
-            transform: scale(1.1);
+        /* HUD */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            text-shadow: 0 0 10px cyan;
+            pointer-events: none;
         }
 
-        .footer {
-            background: hsla(var(--card), 0.5);
-            backdrop-filter: blur(12px);
-            border-top: 1px solid hsl(var(--border));
-        }
-
-        .footer-content {
-            max-width: 1152px;
-            margin: 0 auto;
-        }
-
-        .footer-text {
-            padding: 1rem;
+        /* Menus */
+        .menu {
+            background: rgba(0, 0, 0, 0.85);
+            padding: 40px;
+            border: 2px solid cyan;
+            border-radius: 10px;
             text-align: center;
-            font-size: 0.875rem;
-            color: hsl(var(--muted-foreground));
+            box-shadow: 0 0 20px cyan;
+            pointer-events: auto;
+            backdrop-filter: blur(5px);
         }
 
-        @media (max-width: 640px) {
-            .header-main { padding: 1rem; }
-            .game-stats { flex-direction: row; gap: 1rem; }
-            .ad-container { padding: 0.5rem; }
-            .footer-text { font-size: 0.75rem; }
+        h1 {
+            margin: 0 0 20px 0;
+            font-size: 48px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: linear-gradient(to right, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .hidden { display: none; }
+        button {
+            background: transparent;
+            color: cyan;
+            border: 2px solid cyan;
+            padding: 15px 40px;
+            font-size: 20px;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: cyan;
+            color: black;
+            box-shadow: 0 0 20px cyan;
+        }
+
+        #game-over-menu {
+            display: none;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Footer Ad Container */
+        #ad-footer {
+            height: 60px; /* Fixed height for ad area */
+            width: 100%;
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top: 1px solid #333;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="header-main">
-                <div class="logo">
-                    <svg class="logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10" stroke-width="2"/>
-                        <circle cx="12" cy="12" r="6" stroke-width="2"/>
-                        <circle cx="12" cy="12" r="2" fill="currentColor"/>
-                    </svg>
-                    <h1 class="logo-text">Quick Tap</h1>
-                </div>
-                <div class="high-score">
-                    <p class="high-score-label">High Score</p>
-                    <div class="high-score-value">
-                        <svg class="trophy-icon" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
-                            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
-                            <path d="M4 22h16"/>
-                            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
-                            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
-                            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" stroke="currentColor" stroke-width="2" fill="none"/>
-                        </svg>
-                        <span class="high-score-number" id="headerHighScore">0</span>
-                    </div>
-                </div>
-            </div>
+
+    <!-- GAME AREA -->
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        
+        <div id="ui-layer">
+            <div id="hud" class="hidden">Score: <span id="scoreEl">0</span></div>
             
-            <!-- Header Ad -->
-            <div class="ad-container">
-                <span class="ad-label">Advertisement</span>
-                <div class="MainAdverTiseMentDiv" data-publisher="eyJpdiI6Im9yK09jRkJQQUcwZjNJczNUMEpZc2c9PSIsInZhbHVlIjoiOENtT0tWSzFWRFZBSE9nSjl5WitVdz09IiwibWFjIjoiOTVjZjQ5MzMxM2RlMmM4Y2IzMmIxNDYwYWJlMTAwNTljZmRhZjU0NDIyYTdlZDMwNzc4ZGRkNWY4ZDRhMzZjYSIsInRhZyI6IiJ9" data-adsize="320x50"></div>
+            <div id="start-menu" class="menu">
+                <h1>Neon Defender</h1>
+                <p>Mouse to Move • Click to Shoot</p>
+                <button id="startBtn">Start Game</button>
+            </div>
+
+            <div id="game-over-menu" class="menu">
+                <h1>Game Over</h1>
+                <h2 id="finalScore">0</h2>
+                <button id="restartBtn">Try Again</button>
             </div>
         </div>
-    </header>
+    </div>
 
-    <!-- Main Game Area -->
-    <main class="main">
-        <div class="game-card">
-            <!-- Start Screen -->
-            <div id="startScreen" class="start-screen">
-                <div class="icon-container">
-                    <svg class="target-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10" stroke-width="2"/>
-                        <circle cx="12" cy="12" r="6" stroke-width="2"/>
-                        <circle cx="12" cy="12" r="2" fill="currentColor"/>
-                    </svg>
-                </div>
-                <h2>Ready to Play?</h2>
-                <p class="subtitle">Tap the circles as fast as you can! You have 30 seconds.</p>
-                <button class="btn" onclick="startGame()">Start Game</button>
-            </div>
-
-            <!-- Game Over Screen -->
-            <div id="gameOverScreen" class="game-over-screen hidden">
-                <h2>Game Over!</h2>
-                <p class="subtitle">Your Score</p>
-                <p class="score-display" id="finalScore">0</p>
-                <div id="newHighScore" class="new-high-score hidden">
-                    <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
-                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
-                        <path d="M4 22h16"/>
-                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
-                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
-                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" stroke="currentColor" stroke-width="2" fill="none"/>
-                    </svg>
-                    <span>New High Score!</span>
-                </div>
-                <button class="btn" onclick="startGame()">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" stroke-width="2"/>
-                        <path d="M3 3v5h5" stroke-width="2"/>
-                        <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" stroke-width="2"/>
-                        <path d="M16 16h5v5" stroke-width="2"/>
-                    </svg>
-                    Play Again
-                </button>
-            </div>
-
-            <!-- Playing Screen -->
-            <div id="playingScreen" class="hidden">
-                <div class="game-stats">
-                    <div class="stat">
-                        <p class="stat-label">Score</p>
-                        <p class="stat-value primary" id="currentScore">0</p>
-                    </div>
-                    <div class="stat">
-                        <p class="stat-label">Time</p>
-                        <p class="stat-value secondary" id="timeLeft">30s</p>
-                    </div>
-                </div>
-                <div class="game-area" id="gameArea"></div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="ad-container">
-                <span class="ad-label">Advertisement</span>
-                <div class="MainAdverTiseMentDiv" data-publisher="eyJpdiI6Im9yK09jRkJQQUcwZjNJczNUMEpZc2c9PSIsInZhbHVlIjoiOENtT0tWSzFWRFZBSE9nSjl5WitVdz09IiwibWFjIjoiOTVjZjQ5MzMxM2RlMmM4Y2IzMmIxNDYwYWJlMTAwNTljZmRhZjU0NDIyYTdlZDMwNzc4ZGRkNWY4ZDRhMzZjYSIsInRhZyI6IiJ9" data-adsize="320x50"></div>
-            </div>
-            <div class="footer-text">
-                <p>© 2025 Quick Tap Game. Made with ❤️</p>
-            </div>
-        </div>
+    <!-- FOOTER ADVERTISEMENT -->
+    <footer id="ad-footer">
+        <div class='MainAdverTiseMentDiv' 
+             data-publisher="eyJpdiI6InFoVDd3V2pyaUt3cFdTdW8xZHdyVGc9PSIsInZhbHVlIjoiMXpaTE9wNEljYnp0QUNwWUFyUXM3dz09IiwibWFjIjoiNTAyZWYzOGZjZWI4ZjFlZjUzYjUyZjgzMmVhZjFjNGI0OWVmZGIwYTAyNWZlNTI0YzY0MWU3OGEzOTM4ZWUzMCIsInRhZyI6IiJ9" 
+             data-adsize="320x50">
+        </div> 
+        <script class="adScriptClass" src="https://adsbitvex.com/assets/ads/ad.js"></script>
     </footer>
 
-    <!-- Ad Script -->
-    <script class="adScriptClass" src="https://adsbitvex.site/assets/ads/ad.js" async></script>
-
-    <!-- Game JavaScript -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        let score = 0;
-        let highScore = 0;
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreEl = document.getElementById('scoreEl');
+        const startMenu = document.getElementById('start-menu');
+        const gameOverMenu = document.getElementById('game-over-menu');
+        const hud = document.getElementById('hud');
+        const finalScoreEl = document.getElementById('finalScore');
+        const startBtn = document.getElementById('startBtn');
+        const restartBtn = document.getElementById('restartBtn');
+
+        // Resize Canvas
+        function resize() {
+            canvas.width = document.getElementById('game-container').offsetWidth;
+            canvas.height = document.getElementById('game-container').offsetHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Game State
         let gameActive = false;
-        let timeLeft = 30;
-        let timerInterval = null;
-        let targetElement = null;
-
-        // Load high score from localStorage
-        function loadHighScore() {
-            const saved = localStorage.getItem('highScore');
-            if (saved) {
-                highScore = parseInt(saved);
-                document.getElementById('headerHighScore').textContent = highScore;
-            }
-        }
-
-        // Save high score to localStorage
-        function saveHighScore() {
-            localStorage.setItem('highScore', highScore.toString());
-            document.getElementById('headerHighScore').textContent = highScore;
-        }
-
-        // Get random position for target
-        function getRandomPosition() {
-            const x = Math.random() * 70 + 10;
-            const y = Math.random() * 60 + 10;
-            return { x, y };
-        }
-
-        // Create and show target
-        function showTarget() {
-            const gameArea = document.getElementById('gameArea');
-            if (targetElement) {
-                gameArea.removeChild(targetElement);
-            }
-
-            targetElement = document.createElement('div');
-            targetElement.className = 'target';
-            targetElement.onclick = handleTargetClick;
-
-            const pos = getRandomPosition();
-            targetElement.style.left = pos.x + '%';
-            targetElement.style.top = pos.y + '%';
-            targetElement.style.transform = 'translate(-50%, -50%)';
-
-            gameArea.appendChild(targetElement);
-        }
-
-        // Handle target click
-        function handleTargetClick() {
-            if (!gameActive) return;
-            
-            score++;
-            document.getElementById('currentScore').textContent = score;
-            showTarget();
-        }
-
-        // Update timer
-        function updateTimer() {
-            timeLeft--;
-            document.getElementById('timeLeft').textContent = timeLeft + 's';
-
-            if (timeLeft <= 0) {
-                endGame();
-            }
-        }
-
-        // Start game
-        function startGame() {
-            score = 0;
-            timeLeft = 30;
-            gameActive = true;
-
-            // Update UI
-            document.getElementById('startScreen').classList.add('hidden');
-            document.getElementById('gameOverScreen').classList.add('hidden');
-            document.getElementById('playingScreen').classList.remove('hidden');
-            document.getElementById('currentScore').textContent = '0';
-            document.getElementById('timeLeft').textContent = '30s';
-
-            // Show first target
-            showTarget();
-
-            // Start timer
-            timerInterval = setInterval(updateTimer, 1000);
-        }
-
-        // End game
-        function endGame() {
-            gameActive = false;
-            clearInterval(timerInterval);
-
-            // Remove target
-            const gameArea = document.getElementById('gameArea');
-            if (targetElement) {
-                gameArea.removeChild(targetElement);
-                targetElement = null;
-            }
-
-            // Check for new high score
-            const isNewHighScore = score > highScore;
-            if (isNewHighScore) {
-                highScore = score;
-                saveHighScore();
-            }
-
-            // Update UI
-            document.getElementById('playingScreen').classList.add('hidden');
-            document.getElementById('finalScore').textContent = score;
-            document.getElementById('newHighScore').classList.toggle('hidden', !isNewHighScore);
-            document.getElementById('gameOverScreen').classList.remove('hidden');
-        }
-
-        // Initialize on page load
-        window.addEventListener('DOMContentLoaded', function() {
-            loadHighScore();
+        let score = 0;
+        let animationId;
+        let spawnInterval;
+        
+        // Mouse Position
+        const mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
         });
+
+        canvas.addEventListener('mousedown', () => {
+            if (gameActive) player.shoot();
+        });
+
+        // Classes
+        class Player {
+            constructor() {
+                this.x = canvas.width / 2;
+                this.y = canvas.height / 2;
+                this.radius = 15;
+                this.color = 'cyan';
+                this.velocity = { x: 0, y: 0 };
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                // Rotate towards mouse
+                const angle = Math.atan2(mouse.y - this.y, mouse.x - this.x);
+                ctx.rotate(angle);
+                
+                ctx.beginPath();
+                ctx.moveTo(20, 0);
+                ctx.lineTo(-15, 10);
+                ctx.lineTo(-15, -10);
+                ctx.closePath();
+                
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = this.color;
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+
+            update() {
+                // Smooth follow mouse (Lerp)
+                const delay = 0.08;
+                this.x += (mouse.x - this.x) * delay;
+                this.y += (mouse.y - this.y) * delay;
+                this.draw();
+            }
+
+            shoot() {
+                const angle = Math.atan2(mouse.y - this.y, mouse.x - this.x);
+                const velocity = {
+                    x: Math.cos(angle) * 12,
+                    y: Math.sin(angle) * 12
+                };
+                projectiles.push(new Projectile(this.x, this.y, 4, 'yellow', velocity));
+                
+                // Recoil effect (create particle)
+                particles.push(new Particle(this.x, this.y, Math.random() * 2, this.color, {
+                    x: -velocity.x * 0.2,
+                    y: -velocity.y * 0.2
+                }));
+            }
+        }
+
+        class Projectile {
+            constructor(x, y, radius, color, velocity) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color;
+                this.velocity = velocity;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+
+            update() {
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+                this.draw();
+            }
+        }
+
+        class Enemy {
+            constructor(x, y, radius, color, velocity) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color;
+                this.velocity = velocity;
+            }
+
+            draw() {
+                ctx.beginPath();
+                // Draw a hexagon
+                const numberOfSides = 6;
+                ctx.moveTo(this.x + this.radius * Math.cos(0), this.y + this.radius * Math.sin(0));
+                for (let i = 1; i <= numberOfSides; i += 1) {
+                    ctx.lineTo(this.x + this.radius * Math.cos(i * 2 * Math.PI / numberOfSides), this.y + this.radius * Math.sin(i * 2 * Math.PI / numberOfSides));
+                }
+                
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = this.color;
+                ctx.stroke();
+                // Inner fill opacity
+                ctx.fillStyle = this.color.replace(')', ', 0.1)').replace('rgb', 'rgba');
+                ctx.fill();
+            }
+
+            update() {
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+                this.draw();
+            }
+        }
+
+        class Particle {
+            constructor(x, y, radius, color, velocity) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color;
+                this.velocity = velocity;
+                this.alpha = 1;
+                this.friction = 0.98;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+
+            update() {
+                this.velocity.x *= this.friction;
+                this.velocity.y *= this.friction;
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+                this.alpha -= 0.02; // Fade out
+                this.draw();
+            }
+        }
+
+        class Star {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.radius = Math.random() * 2;
+                this.alpha = Math.random();
+            }
+            
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                ctx.fillStyle = 'white';
+                ctx.fill();
+                ctx.restore();
+            }
+
+            update() {
+                // Parallax drift
+                this.y += 0.2;
+                if(this.y > canvas.height) this.y = 0;
+                this.draw();
+            }
+        }
+
+        // Arrays
+        let player = new Player();
+        let projectiles = [];
+        let enemies = [];
+        let particles = [];
+        let stars = [];
+
+        // Setup Stars
+        for(let i=0; i<50; i++) {
+            stars.push(new Star());
+        }
+
+        function spawnEnemies() {
+            spawnInterval = setInterval(() => {
+                const radius = Math.random() * (30 - 10) + 10;
+                let x, y;
+
+                if (Math.random() < 0.5) {
+                    x = Math.random() < 0.5 ? 0 - radius : canvas.width + radius;
+                    y = Math.random() * canvas.height;
+                } else {
+                    x = Math.random() * canvas.width;
+                    y = Math.random() < 0.5 ? 0 - radius : canvas.height + radius;
+                }
+
+                const color = `hsl(${Math.random() * 360}, 50%, 50%)`;
+                
+                // Calculate angle to player
+                const angle = Math.atan2(player.y - y, player.x - x);
+                const velocity = {
+                    x: Math.cos(angle) * (1 + score/500), // Speed up as score increases
+                    y: Math.sin(angle) * (1 + score/500)
+                };
+
+                enemies.push(new Enemy(x, y, radius, color, velocity));
+            }, 1000);
+        }
+
+        function init() {
+            player = new Player();
+            projectiles = [];
+            enemies = [];
+            particles = [];
+            score = 0;
+            scoreEl.innerText = score;
+            gameActive = true;
+            hud.classList.remove('hidden');
+            spawnEnemies();
+        }
+
+        function animate() {
+            animationId = requestAnimationFrame(animate);
+            
+            // Clear Screen with fade effect for trails
+            ctx.fillStyle = 'rgba(5, 5, 5, 0.3)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Stars
+            stars.forEach(star => star.update());
+
+            player.update();
+
+            // Particles
+            particles.forEach((particle, index) => {
+                if (particle.alpha <= 0) {
+                    particles.splice(index, 1);
+                } else {
+                    particle.update();
+                }
+            });
+
+            // Projectiles
+            projectiles.forEach((projectile, index) => {
+                projectile.update();
+
+                // Remove from edges
+                if (projectile.x + projectile.radius < 0 ||
+                    projectile.x - projectile.radius > canvas.width ||
+                    projectile.y + projectile.radius < 0 ||
+                    projectile.y - projectile.radius > canvas.height) {
+                    setTimeout(() => {
+                        projectiles.splice(index, 1);
+                    }, 0);
+                }
+            });
+
+            // Enemies
+            enemies.forEach((enemy, index) => {
+                enemy.update();
+
+                const dist = Math.hypot(player.x - enemy.x, player.y - enemy.y);
+                
+                // End Game
+                if (dist - enemy.radius - player.radius < 1) {
+                    cancelAnimationFrame(animationId);
+                    clearInterval(spawnInterval);
+                    gameActive = false;
+                    
+                    finalScoreEl.innerText = score;
+                    startMenu.classList.add('hidden');
+                    hud.classList.add('hidden');
+                    gameOverMenu.style.display = 'block'; // using display block for flex parent
+                }
+
+                // Projectile Hit Enemy
+                projectiles.forEach((projectile, pIndex) => {
+                    const dist = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y);
+
+                    if (dist - enemy.radius - projectile.radius < 1) {
+                        
+                        // Create explosions
+                        for (let i = 0; i < enemy.radius * 2; i++) {
+                            particles.push(new Particle(
+                                projectile.x, 
+                                projectile.y, 
+                                Math.random() * 3, 
+                                enemy.color,
+                                {
+                                    x: (Math.random() - 0.5) * (Math.random() * 8),
+                                    y: (Math.random() - 0.5) * (Math.random() * 8)
+                                }
+                            ));
+                        }
+
+                        // Shrink or destroy
+                        if (enemy.radius - 10 > 10) {
+                            score += 50;
+                            scoreEl.innerText = score;
+                            // Smooth shrink
+                            enemy.radius -= 10;
+                            setTimeout(() => {
+                                projectiles.splice(pIndex, 1);
+                            }, 0);
+                        } else {
+                            score += 150;
+                            scoreEl.innerText = score;
+                            setTimeout(() => {
+                                enemies.splice(index, 1);
+                                projectiles.splice(pIndex, 1);
+                            }, 0);
+                        }
+                    }
+                });
+            });
+        }
+
+        // Event Listeners for Buttons
+        startBtn.addEventListener('click', () => {
+            startMenu.classList.add('hidden');
+            init();
+            animate();
+        });
+
+        restartBtn.addEventListener('click', () => {
+            gameOverMenu.style.display = 'none';
+            init();
+            animate();
+        });
+
     </script>
 </body>
 </html>
